@@ -1,5 +1,5 @@
 import aprslib
-from datetime import datetime
+from datetime import datetime, timezone
 import paho.mqtt.client as mqtt
 import json
 
@@ -7,7 +7,7 @@ import json
 def unpack_dict(d):
     try:
         message = {}
-        message["timestamp"] = datetime.utcnow().isoformat()
+        message["timestamp"] = datetime.now(timezone.utc).isoformat()
         message["script"] = "radius"
         for k, v in d.items():
             try:
